@@ -1,9 +1,9 @@
 const parseArgs = () => {
-    process.argv.map((arg) => {
-        if (/^--/.test(arg)) {
-            const parsedArg = arg.slice(2).split("=")
-            console.log(parsedArg[0] + " is " + parsedArg[1])
-        }
+    console.log(process.argv)
+    process.argv.join(" ").split("--").map((arg) => {
+        // console.log(arg)
+        const parsedArg = arg.split(" ")
+        console.log(parsedArg[0] + " is " + parsedArg[1])
     })
 };
 
