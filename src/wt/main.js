@@ -9,7 +9,6 @@ const eventEmitter = new EventEmitter()
 
 eventEmitter.on("workersStop", () => {
     console.log(result)
-    // console.log("EVENT EMITTED=====================");
 })
 
 const performCalculations = async () => {
@@ -20,10 +19,8 @@ const performCalculations = async () => {
         const worker = new Worker(WORKER_FILE_NAME, {workerData: {data, index: i}})
         worker.on("message", (content) => {
             result[+content.index] = {status: "resolved", data: content.result}
-            // console.log(content)
         })
         worker.on("error", (err) => {
-            // console.log(err)
             result.push({status: "error", data: null})
             numberOfCPUs--
             if (numberOfCPUs === 0) eventEmitter.emit("workersStop")
@@ -33,8 +30,6 @@ const performCalculations = async () => {
             if (numberOfCPUs === 0) eventEmitter.emit("workersStop")
         })
     }
-    // while(numberOfCPUs > 0) {}
-    // console.log(result)
 };
 
 await performCalculations();

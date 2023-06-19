@@ -10,7 +10,6 @@ const decompress = async () => {
     const archiveBuffer = Buffer.concat(chunks)
     unzip(archiveBuffer, (err, buffer) => {
         if (err) throw new Error("Error while unzipping file")
-        // console.log(buffer.toString("utf-8"))
         writeFileSync(DESTINATION_PATH, buffer.toString("utf-8"), (err) => {
             if (err) throw new Error("Error while writing file")
         })

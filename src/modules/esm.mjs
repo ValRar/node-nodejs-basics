@@ -1,9 +1,6 @@
 import path from 'path';
-// const { release, version } = require('os');
 import { release, version } from 'os';
-// const { createServer: createServerHttp } = require('http');
 import { createServer as createServerHttp} from 'http';
-// require('./files/c');
 import "./files/c.js"
 
 import { basename, dirname } from "node:path";
@@ -16,10 +13,8 @@ const random = Math.random();
 let unknownObject;
 
 if (random > 0.5) {
-    // unknownObject = require('./files/a.json');
     unknownObject = await import("./files/a.json", {assert: { type: "json" } })
 } else {
-    // unknownObject = require('./files/b.json');
     unknownObject = await import("./files/b.json", {assert: { type: "json" } })
 }
 
@@ -43,9 +38,5 @@ myServer.listen(PORT, () => {
     console.log('To terminate it, use Ctrl+C combination');
 });
 
-// module.exports = {
-//     unknownObject,
-//     myServer,
-// };
 export default {unknownObject, myServer}
 
