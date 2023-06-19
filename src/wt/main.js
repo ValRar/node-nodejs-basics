@@ -17,10 +17,10 @@ const performCalculations = async () => {
     let numberOfCPUs = availableParallelism()
     for (let i = 0;i < numberOfCPUs; i++) {
         const data = i + 10
-        const worker = new Worker(WORKER_FILE_NAME, {workerData: {data}})
+        const worker = new Worker(WORKER_FILE_NAME, {workerData: {data, index: i}})
         worker.on("message", (content) => {
-            result.push({status: "resolved", data: content})
-            // console.log(result)
+            result[+content.index] = {status: "resolved", data: content.result}
+            // console.log(content)
         })
         worker.on("error", (err) => {
             // console.log(err)
